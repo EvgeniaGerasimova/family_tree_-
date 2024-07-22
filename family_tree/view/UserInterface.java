@@ -1,21 +1,19 @@
 package family_tree.view;
 
-import family_tree.model.human.Human;
 import family_tree.model.tree.FamilyTree;
 import family_tree.presenter.FamilyTreePresenter;
-
+import family_tree.model.human.Human;
 import java.util.List;
 import java.util.Scanner;
-
 
 public class UserInterface implements View {
     private FamilyTreePresenter presenter;
     private Scanner scanner;
     private FamilyTree<Human> familyTree;
 
-    public UserInterface(FamilyTree<Human> familyTree) {
+    public UserInterface () {
         this.scanner = new Scanner(System.in);
-        this.familyTree = familyTree;
+        this.familyTree = new FamilyTree<>();
     }
 
     public void setPresenter(FamilyTreePresenter presenter) {
@@ -35,16 +33,24 @@ public class UserInterface implements View {
 
         switch (command) {
             case 1:
-                presenter.findHumanByName();
+                System.out.print("Введите имя человека: ");
+                String name = scanner.nextLine();
+                presenter.findHumanByName(name);
                 break;
             case 2:
-                presenter.findChildrenByName();
+                System.out.print("Введите имя родителя: ");
+                name = scanner.nextLine();
+                presenter.findChildrenByName(name);
                 break;
             case 3:
-                presenter.findParentByName();
+                System.out.print("Введите имя ребенка: ");
+                name = scanner.nextLine();
+                presenter.findParentByName(name);
                 break;
             case 4:
-                presenter.findSiblingsByName();
+                System.out.print("Введите имя ребенка: ");
+                name = scanner.nextLine();
+                presenter.findSiblingsByName(name);
                 break;
             case 5:
                 System.out.println("До свидания! ");
@@ -53,6 +59,7 @@ public class UserInterface implements View {
                 System.out.println("Неверная команда. Попробуйте снова. ");
         }
     }
+
     @Override
     public void displayHuman(Human human) {
         System.out.println("Человек найден: " + human.getName() + ", Дата рождения: " + human.getBirthDate() + ", Пол: " + human.getGender());
@@ -65,9 +72,9 @@ public class UserInterface implements View {
 
     @Override
     public void displayChildren(List<Human> children) {
-        System.out.println("Дети:");
         children = familyTree.sortByBirthDate(children);
         children = familyTree.sortByName(children);
+        System.out.println("Дети:");
         for (Human child : children) {
             System.out.println(child.getName() + ", Дата рождения: " + child.getBirthDate() + ", Пол: " + child.getGender());
         }
@@ -80,9 +87,9 @@ public class UserInterface implements View {
 
     @Override
     public void displaySiblings(List<Human> siblings) {
-        System.out.println("Братья и сестры:");
         siblings = familyTree.sortByBirthDate(siblings);
         siblings = familyTree.sortByName(siblings);
+        System.out.println("Братья и сестры:");
         for (Human sibling : siblings) {
             System.out.println(sibling.getName() + ", Дата рождения: " + sibling.getBirthDate() + ", Пол: " + sibling.getGender());
         }

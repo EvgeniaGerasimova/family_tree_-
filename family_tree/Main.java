@@ -1,19 +1,22 @@
 package family_tree;
 
+import family_tree.model.Service.Service;
 import family_tree.model.human.Gender;
 import family_tree.model.tree.FamilyTree;
 import family_tree.model.human.Human;
 import family_tree.presenter.FamilyTreePresenter;
 import family_tree.view.UserInterface;
 
+
 public class Main {
-    public static void main(String[] args) {
-        FamilyTree<Human> familyTree = createFamilyTree();
-        UserInterface view = new UserInterface(familyTree);
-        FamilyTreePresenter presenter = new FamilyTreePresenter(familyTree, view);
-        view.setPresenter(presenter);
-        view.start();
-    }
+      public static void main(String[] args) {
+          FamilyTree<Human> familyTree = createFamilyTree();
+          Service service = new Service(familyTree);
+          UserInterface view = new UserInterface();
+          FamilyTreePresenter presenter = new FamilyTreePresenter(service, view);
+          view.setPresenter(presenter);
+          view.start();
+      }
 
     private static FamilyTree<Human> createFamilyTree() {
         FamilyTree<Human> familyTree = new FamilyTree<>();

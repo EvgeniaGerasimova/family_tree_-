@@ -1,7 +1,6 @@
 package family_tree.view;
 
 import family_tree.model.human.Human;
-
 import java.util.List;
 
 public interface View {
