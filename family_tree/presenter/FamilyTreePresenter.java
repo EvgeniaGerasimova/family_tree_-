@@ -1,11 +1,11 @@
 package family_tree.presenter;
 
 import family_tree.model.Service.Service;
-import family_tree.model.tree.IterableInterface;
 import family_tree.view.UserInterface;
 import family_tree.model.human.Human;
 import java.util.List;
 
+// Презентер, связывающий сервис и представление
 public class FamilyTreePresenter {
     private Service service;
     private UserInterface view;
@@ -15,6 +15,7 @@ public class FamilyTreePresenter {
         this.view = view;
     }
 
+    // Поиск человека по имени
     public void findHumanByName(String name) {
         Human human = service.findMember(name);
         if (human != null) {
@@ -24,6 +25,7 @@ public class FamilyTreePresenter {
         }
     }
 
+    // Поиск детей по имени родителя
     public void findChildrenByName(String name) {
         Human parent = service.findMember(name);
         if (parent != null) {
@@ -38,6 +40,7 @@ public class FamilyTreePresenter {
         }
     }
 
+    // Поиск родителя по имени ребенка
     public void findParentByName(String name) {
         Human child = service.findMember(name);
         if (child != null) {
@@ -52,6 +55,7 @@ public class FamilyTreePresenter {
         }
     }
 
+    // Поиск братьев/сестер по имени ребенка
     public void findSiblingsByName(String name) {
         Human child = service.findMember(name);
         if (child != null) {

@@ -3,6 +3,7 @@ package family_tree.view;
 import family_tree.model.tree.FamilyTree;
 import family_tree.presenter.FamilyTreePresenter;
 import family_tree.model.human.Human;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,10 +17,12 @@ public class UserInterface implements View {
         this.familyTree = new FamilyTree<>();
     }
 
+    // Установка презентера для взаимодействия
     public void setPresenter(FamilyTreePresenter presenter) {
         this.presenter = presenter;
     }
 
+    // Запуск интерфейса пользователя и вывод меню
     public void start() {
         System.out.println("\nВыберите команду: ");
         System.out.println("1. Найти человека по имени");
@@ -28,9 +31,11 @@ public class UserInterface implements View {
         System.out.println("4. Вывести братьев и сестер по имени ребенка");
         System.out.println("5. Выход");
 
+        // Получение команды от пользователя
         int command = scanner.nextInt();
         scanner.nextLine();
 
+        // Обработка команды
         switch (command) {
             case 1:
                 System.out.print("Введите имя человека: ");
@@ -60,35 +65,40 @@ public class UserInterface implements View {
         }
     }
 
+    // Вывод информации о человеке
     @Override
     public void displayHuman(Human human) {
         System.out.println("Человек найден: " + human.getName() + ", Дата рождения: " + human.getBirthDate() + ", Пол: " + human.getGender());
     }
 
+    // Вывод сообщения об ошибке
     @Override
     public void displayError(String message) {
         System.out.println("Ошибка: " + message);
     }
 
+    // Вывод информации о детях
     @Override
     public void displayChildren(List<Human> children) {
-        children = familyTree.sortByBirthDate(children);
-        children = familyTree.sortByName(children);
+        children = familyTree.sortByBirthDate(children); // Сортировка по др
+        children = familyTree.sortByName(children); // Сортировка по имени
         System.out.println("Дети:");
         for (Human child : children) {
             System.out.println(child.getName() + ", Дата рождения: " + child.getBirthDate() + ", Пол: " + child.getGender());
         }
     }
 
+    // Вывод информации о родителе
     @Override
     public void displayParent(Human parent) {
         System.out.println("Родитель: " + parent.getName() + ", Дата рождения: " + parent.getBirthDate() + ", Пол: " + parent.getGender());
     }
 
+    // Вывод информации о братьях/сестрах
     @Override
     public void displaySiblings(List<Human> siblings) {
-        siblings = familyTree.sortByBirthDate(siblings);
-        siblings = familyTree.sortByName(siblings);
+        siblings = familyTree.sortByBirthDate(siblings); // Сортировка по др
+        siblings = familyTree.sortByName(siblings); // Сортировка по имени
         System.out.println("Братья и сестры:");
         for (Human sibling : siblings) {
             System.out.println(sibling.getName() + ", Дата рождения: " + sibling.getBirthDate() + ", Пол: " + sibling.getGender());
